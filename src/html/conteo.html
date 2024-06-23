@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../css/templatemo-style.css">
+    <title>Conteo de Votos</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .header-transparent {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(125, 31, 111, 0.5);
+            padding: 10px;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        .header-transparent img {
+            max-width: 100px; /* Adjust size as needed */
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center; /* Centrar verticalmente los elementos */
+        }
+
+        .header-content img {
+            margin-right: 700px; /* Espacio entre la imagen y el texto */
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 100px auto; /* Mover el formulario hacia abajo */
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group h2 {
+            margin-bottom: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-group button {
+            flex: 1;
+            margin: 5px;
+            padding: 10px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-group button.partido1 {
+            background-color: red;
+        }
+
+        .btn-group button.partido2 {
+            background-color: brown;
+        }
+
+        .btn-group button.partido3 {
+            background-color: blue;
+        }
+
+        .btn-group button.partido4 {
+            background-color: green;
+        }
+
+        .vote-results {
+            margin-top: 20px;
+        }
+
+        .vote-results p {
+            margin: 5px 0;
+        }
+
+        footer {
+            margin-top: auto; /* Empujar al fondo */
+            width: 100%;
+            background-color: rgba(125, 31, 111, 0.5);
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-transparent">
+        <div class="header-content">
+            <img src="../images/LOGOiNE.png" alt="Logo">
+            <h1>Conteo de Votos</h1>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <div class="form-container">
+            <form id="voteForm">
+                <!-- Elecciones Presidente de País -->
+                <div class="form-group">
+                    <h2>Elecciones Presidente de País</h2>
+                    <div class="btn-group">
+                        <button type="button" class="partido1" onclick="vote('presidente', 'partido1')">Partido 1</button>
+                        <button type="button" class="partido2" onclick="vote('presidente', 'partido2')">Partido 2</button>
+                        <button type="button" class="partido3" onclick="vote('presidente', 'partido3')">Partido 3</button>
+                        <button type="button" class="partido4" onclick="vote('presidente', 'partido4')">Partido 4</button>
+                    </div>
+                    <div id="presidenteResults" class="vote-results"></div>
+                </div>
+                <!-- Elecciones Gobernador de Estado -->
+                <div class="form-group">
+                    <h2>Elecciones Gobernador de Estado</h2>
+                    <div class="btn-group">
+                        <button type="button" class="partido1" onclick="vote('gobernador', 'partido1')">Partido 1</button>
+                        <button type="button" class="partido2" onclick="vote('gobernador', 'partido2')">Partido 2</button>
+                        <button type="button" class="partido3" onclick="vote('gobernador', 'partido3')">Partido 3</button>
+                        <button type="button" class="partido4" onclick="vote('gobernador', 'partido4')">Partido 4</button>
+                    </div>
+                    <div id="gobernadorResults" class="vote-results"></div>
+                </div>
+                <!-- Diputado General -->
+                <div class="form-group">
+                    <h2>Diputado General</h2>
+                    <div class="btn-group">
+                        <button type="button" class="partido1" onclick="vote('diputado_general', 'partido1')">Partido 1</button>
+                        <button type="button" class="partido2" onclick="vote('diputado_general', 'partido2')">Partido 2</button>
+                        <button type="button" class="partido3" onclick="vote('diputado_general', 'partido3')">Partido 3</button>
+                        <button type="button" class="partido4" onclick="vote('diputado_general', 'partido4')">Partido 4</button>
+                    </div>
+                    <div id="diputado_generalResults" class="vote-results"></div>
+                </div>
+                <!-- Diputado Federal -->
+                <div class="form-group">
+                    <h2>Diputado Federal</h2>
+                    <div class="btn-group">
+                        <button type="button" class="partido1" onclick="vote('diputado_federal', 'partido1')">Partido 1</button>
+                        <button type="button" class="partido2" onclick="vote('diputado_federal', 'partido2')">Partido 2</button>
+                        <button type="button" class="partido3" onclick="vote('diputado_federal', 'partido3')">Partido 3</button>
+                        <button type="button" class="partido4" onclick="vote('diputado_federal', 'partido4')">Partido 4</button>
+                    </div>
+                    <div id="diputado_federalResults" class="vote-results"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
+        <div class="container-fluid tm-container-small">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-12 px-5 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">ACERCA DE YECO</h3>
+                    <p>La plataforma de YECO Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis aspernatur tenetur odio odit autem ad eius, doloremque iste rem nesciunt pariatur nihil ut quidem sequi id dolor vero dignissimos harum.</p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                    <h3 class="tm-text-primary mb-4 tm-footer-title">Nuestros Links</h3>
+                    <ul class="tm-footer-links pl-0">
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Our Company</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 px-5 mb-5">
+                    <ul class="tm-social-links d-flex justify-content-end pl-0 mb-5">
+                        <li class="mb-2"><a href="https://facebook.com"><i class="fab fa-facebook"></i></a></li>
+                        <li class="mb-2"><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
+                        <li class="mb-2"><a href="https://instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        <li class="mb-2"><a href="https://pinterest.com"><i class="fab fa-pinterest"></i></a></li>
+                    </ul>
+                    <a href="#" class="tm-text-gray text-right d-block mb-2">Terms of Use</a>
+                    <a href="#" class="tm-text-gray text-right d-block">Privacy Policy</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-7 col-12 px-5 mb-3">
+                    Copyright 2024 YECO Company. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function vote(section, party) {
+            const results = {
+                presidente: {partido1: 0, partido2: 0, partido3: 0, partido4: 0},
+                gobernador: {partido1: 0, partido2: 0, partido3: 0, partido4: 0},
+                diputado_general: {partido1: 0, partido2: 0, partido3: 0, partido4: 0},
+                diputado_federal: {partido1: 0, partido2: 0, partido3: 0, partido4: 0}
+            };
+
+            const storedResults = JSON.parse(localStorage.getItem('results')) || results;
+            storedResults[section][party] += 1;
+            localStorage.setItem('results', JSON.stringify(storedResults));
+            displayResults(section);
+        }
+
+        function displayResults(section) {
+            const storedResults = JSON.parse(localStorage.getItem('results'));
+            const totalVotes = Object.values(storedResults[section]).reduce((a, b) => a + b, 0);
+            const resultsContainer = document.getElementById(section + 'Results');
+            resultsContainer.innerHTML = '';
+
+            for (const [party, votes] of Object.entries(storedResults[section])) {
+                const percentage = totalVotes ? ((votes / totalVotes) * 100).toFixed(2) : 0;
+                resultsContainer.innerHTML += `<p>${party}: ${votes} votos (${percentage}%)</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            displayResults('presidente');
+            displayResults('gobernador');
+            displayResults('diputado_general');
+            displayResults('diputado_federal');
+        });
+    </script>
+</body>
+</html>

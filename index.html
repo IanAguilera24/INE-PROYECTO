@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in || Sign up from</title>
+     <!-- font awesome icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css stylesheet -->
+    <link rel="stylesheet" href="src/css/index.css">
+</head>
+<body>
+    <header class="header-transparent">
+        <img src="src/images/LOGOiNE.png" alt="Logo">
+    </header>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+            <form action="src/html/funcionario.html">
+                <h1>Inicia Sesion Funcionario</h1>
+                <span>Introduce tus datos</span>
+                <div class="infield">
+                    <input type="email" placeholder="Email" name="email"/>
+                    <label></label>
+                </div>
+                <div class="infield">
+                    <input type="password" placeholder="Password" />
+                    <label></label>
+                </div>
+                <button>Iniciar Sesion</button>
+            </form>
+        </div>
+        <div class="overlay-container" id="overlayCon">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Hola, Admin</h1>
+                    <p>Introduce tus datos de admin para iniciar</p>
+                    <button>Funcion</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hola, amigo!!</h1>
+                    <p>Introduce tus datos para iniciar sesion</p>
+                </div>
+            </div>
+            <button id="overlayBtn"></button>
+        </div>
+    </div>
+
+    <footer>
+        YECO TECHNOLOGIES ®
+    </footer>
+    
+    <script src="src/js/index.js"></script>
+
+</body>
+</html>
